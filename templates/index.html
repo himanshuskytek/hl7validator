@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HL7 v2.3 Validator</title>
+</head>
+<body>
+    <h2>Upload HL7 Message for Validation</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="hl7file" accept=".hl7,.txt" required>
+        <input type="submit" value="Validate">
+    </form>
+
+    {% if result %}
+        <pre>{{ result }}</pre>
+    {% endif %}
+</body>
+</html>
