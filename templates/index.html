@@ -1,17 +1,120 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>HL7 v2.3 Validator</title>
+    <meta charset="UTF-8">
+    <title>ClinDCast HL7 Validator</title>
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background: #f2f4f8;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 80px auto;
+            padding: 30px 40px;
+            background: #ffffff;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: #1a73e8;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        h3 {
+            color: #444;
+            font-weight: normal;
+            margin-bottom: 25px;
+        }
+
+        input[type="file"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 25px;
+            background: linear-gradient(135deg, #1a73e8, #4a90e2);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: transform 0.2s ease;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        .result {
+            margin-top: 30px;
+            padding: 25px;
+            border-radius: 10px;
+            font-size: 16px;
+            line-height: 1.5;
+            display: inline-block;
+            text-align: left;
+            white-space: pre-wrap;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .success {
+            background-color: #e6ffed;
+            color: #1e4620;
+            border: 1px solid #a6f3c4;
+        }
+
+        .error {
+            background-color: #ffe6e6;
+            color: #8a1f1f;
+            border: 1px solid #f5b1b1;
+        }
+
+        .icon {
+            font-size: 24px;
+            margin-right: 10px;
+            vertical-align: middle;
+            animation: bounce 0.6s infinite alternate;
+        }
+
+        @keyframes bounce {
+            0%   { transform: translateY(0); }
+            100% { transform: translateY(-5px); }
+        }
+    </style>
 </head>
 <body>
-    <h2>Upload HL7 Message for Validation</h2>
-    <form method="POST" enctype="multipart/form-data">
-        <input type="file" name="hl7file" accept=".hl7,.txt" required>
-        <input type="submit" value="Validate">
-    </form>
+    <div class="container">
+        <h1>ClinDCast</h1>
+        <h3>HL7 Validator - Upload your HL7 message</h3>
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="hl7file" accept=".hl7,.txt" required>
+            <br>
+            <button type="submit">Validate</button>
+        </form>
 
-    {% if result %}
-        <pre>{{ result }}</pre>
-    {% endif %}
+        {% if result %}
+        <div class="result {{ 'success' if '✅' in result else 'error' }}">
+            <span class="icon">{{ '✅' if '✅' in result else '❌' }}</span>
+            {{ result }}
+        </div>
+        {% endif %}
+    </div>
 </body>
 </html>
