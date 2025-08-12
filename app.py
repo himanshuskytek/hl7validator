@@ -228,7 +228,7 @@ def index():
             # Step 2: Validate required fields
             missing_fields = [fld for fld in field_rules if fld not in present_fields]
             if missing_fields:
-                result += f"❌ Missing required fields:\n" + "\n".join(missing_fields)
+                result += f"❌ Mandatory fields should be included:\n" + "\n".join(missing_fields)
 
             if not segment_errors and not missing_fields:
                 result = "✅ Validation successful. All mandatory segments and fields are present."
